@@ -1,5 +1,4 @@
 function switchTheme() {
-
 	// let menuItems = document.querySelectorAll('light');
 	const buttonTheme = document.getElementById("themeButton");
 	const elementCard = document.querySelectorAll(".card");
@@ -8,6 +7,6 @@ function switchTheme() {
 		element.classList.toggle("bg-dark");
 		element.classList.toggle("text-white");
 	});
-
 }
+
 console.log(changeTheme());
