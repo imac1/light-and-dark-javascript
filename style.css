@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fafafa;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+    margin: 0;
+    
+    transition: background 0.2s linear;
+}
+
+body.dark {
+    background: #292c35;
+}
