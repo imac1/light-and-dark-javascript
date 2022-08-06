@@ -1,50 +1,37 @@
-function switchTheme() {
-	// // let menuItems = document.querySelectorAll('light');
-	// const buttonTheme = document.getElementById("themeButton");
-	// // const elementCard = document.querySelectorAll(".card");
-	// const tableElemement = document.querySelectorAll(".table");
-	// const btnElem = document.querySelectorAll(".btn");
-	// const bgElem = document.querySelectorAll(".bg");
-	// const dropdownEl = document.querySelectorAll(".dropdown");
-	// // Create a NodeIterator to represent all elements in the document body
-	// var ni = document.createNodeIterator(
-	// 	document.body,
-	// 	NodeFilter.SHOW_ELEMENT,
-	// 	null,
-	// 	false
-	// );
-	// // Loop forward through all nodes in the iterator
-	// for (var e = ni.nextNode(); e != null; e = ni.nextNode()) {
-	// 	// Do something with element e
-	// 	console.log(e);
-	// }
-
-	// // console.log(elementCard);
-	// // elementCard.forEach((element) => {
-	// // 	element.classList.toggle("bg-dark");
-	// // 	element.classList.toggle("text-white");
-	// // 	element.classList.toggle("table-dark");
-	// // });
-	// tableElemement.forEach((element) => {
-	// 	element.classList.toggle("table-dark");
-	// });
-	// btnElem.forEach((elem) => {
-	// 	elem.classList.toggle("btn-dark");
-	// });
-	// bgElem.forEach((elem) => {
-	// 	elem.classList.toggle("bg-dark");
-	// });
-	// const span = document.querySelector(".navbar", ".bg");
-	// const classes = span.classList;
-	// console.log(classes);
-	// classes.replace(".navbar-light", ".navbar-dark");
-	// classes.replace(".bg-light", ".bg-dark");
-	const switcher = document.getElementById("themeSwitch");
-	console.log(switcher);
-	switcher?.addEventListener("click", () => {
-		console.log("btn clicked");
-		document.body.classList.toggle("dark");
-	});
+// you can use app's unique identifier here
+const LOCAL_STORAGE_KEY = "toggle-bootstrap-theme";
+const LOCAL_META_DATA = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+// you can change this url as needed
+const DARK_THEME_PATH = "https://bootswatch.com/4/cyborg/bootstrap.min.css";
+const DARK_STYLE_LINK = document.getElementById("dark-theme-style");
+const THEME_TOGGLER = document.getElementById("themeSwitch");
+let isDark = LOCAL_META_DATA && LOCAL_META_DATA.isDark;
+// check if user has already selected dark theme earlier
+if (isDark) {
+	enableDarkTheme();
+} else {
+	disableDarkTheme();
 }
-
-console.log(switchTheme());
+/**
+ * Apart from toggling themes, this will also store user's theme preference in local storage.
+ * So when user visits next time, we can load the same theme.
+ *
+ */
+function switchTheme() {
+	isDark = !isDark;
+	if (isDark) {
+		enableDarkTheme();
+	} else {
+		disableDarkTheme();
+	}
+	const META = { isDark };
+	localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(META));
+}
+function enableDarkTheme() {
+	DARK_STYLE_LINK.setAttribute("href", DARK_THEME_PATH);
+	THEME_TOGGLER.innerHTML = "🌙 Activate Light Theme";
+}
+function disableDarkTheme() {
+	DARK_STYLE_LINK.setAttribute("href", "");
+	THEME_TOGGLER.innerHTML = "🌞 Activate Dark Theme";
+}
